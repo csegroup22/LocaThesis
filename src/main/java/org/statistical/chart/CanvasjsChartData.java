@@ -109,7 +109,7 @@ public class CanvasjsChartData
 			
 			map = new HashMap<Object,Object>();
 			map.put("label", location+"-"+stayLocation.getId());
-			map.put("y", Math.abs((7*random.nextFloat()+16.8)*stayLocation.getWeekday()));
+			map.put("y", stayLocation.getWeekday());
 			dataPoints.add(map);
 		}
 		list.add(dataPoints);
@@ -130,7 +130,7 @@ public class CanvasjsChartData
 			
 			map = new HashMap<Object,Object>();
 			map.put("label", location+"-"+stayLocation.getId());
-			map.put("y", Math.abs((7*random.nextFloat()+16.8)*stayLocation.getWeekend()));
+			map.put("y", stayLocation.getWeekend());
 			dataPoints.add(map);
 		}
 		list.add(dataPoints);

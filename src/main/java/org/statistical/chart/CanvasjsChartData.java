@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
-
 import org.locationanalyzer.patterns.entities.StayLocation;
 import org.locationanalyzer.user.User;
 import org.springframework.stereotype.Component;
@@ -97,7 +95,6 @@ public class CanvasjsChartData
 	}
 	public List<List<Map<Object, Object>>> getCanvasjsDataListWeekDay(User user) {
 		ArrayList<StayLocation> total = user.getWeekdays();
-		Random random=new Random();
 		Map<Object,Object> map = null;
 		List<List<Map<Object,Object>>> list = new ArrayList<List<Map<Object,Object>>>();
 		List<Map<Object,Object>> dataPoints = new ArrayList<Map<Object,Object>>();
@@ -119,7 +116,6 @@ public class CanvasjsChartData
 	{
 		ArrayList<StayLocation> total = user.getWeekend();
 		Map<Object,Object> map = null;
-		Random random=new Random();
 		List<List<Map<Object,Object>>> list = new ArrayList<List<Map<Object,Object>>>();
 		List<Map<Object,Object>> dataPoints = new ArrayList<Map<Object,Object>>();
 		

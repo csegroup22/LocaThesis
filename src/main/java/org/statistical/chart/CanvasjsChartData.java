@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
+
 import org.locationanalyzer.patterns.entities.StayLocation;
 import org.locationanalyzer.user.User;
 import org.springframework.stereotype.Component;
@@ -95,6 +97,7 @@ public class CanvasjsChartData
 	}
 	public List<List<Map<Object, Object>>> getCanvasjsDataListWeekDay(User user) {
 		ArrayList<StayLocation> total = user.getWeekdays();
+		new Random();
 		Map<Object,Object> map = null;
 		List<List<Map<Object,Object>>> list = new ArrayList<List<Map<Object,Object>>>();
 		List<Map<Object,Object>> dataPoints = new ArrayList<Map<Object,Object>>();
@@ -103,10 +106,9 @@ public class CanvasjsChartData
 		{
 			String location="Location";
 			StayLocation stayLocation=total.get(i);
-			
 			map = new HashMap<Object,Object>();
 			map.put("label", location+"-"+stayLocation.getId());
-			map.put("y", stayLocation.getWeekday());
+			map.put("y", Math.abs(millisecondToHours(stayLocation.getWeekday())));
 			dataPoints.add(map);
 		}
 		list.add(dataPoints);
@@ -116,6 +118,7 @@ public class CanvasjsChartData
 	{
 		ArrayList<StayLocation> total = user.getWeekend();
 		Map<Object,Object> map = null;
+		new Random();
 		List<List<Map<Object,Object>>> list = new ArrayList<List<Map<Object,Object>>>();
 		List<Map<Object,Object>> dataPoints = new ArrayList<Map<Object,Object>>();
 		
@@ -123,10 +126,9 @@ public class CanvasjsChartData
 		{
 			String location="Location";
 			StayLocation stayLocation=total.get(i);
-			
 			map = new HashMap<Object,Object>();
 			map.put("label", location+"-"+stayLocation.getId());
-			map.put("y", stayLocation.getWeekend());
+			map.put("y", Math.abs(millisecondToHours(stayLocation.getWeekend())));
 			dataPoints.add(map);
 		}
 		list.add(dataPoints);

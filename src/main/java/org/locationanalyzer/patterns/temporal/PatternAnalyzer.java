@@ -4,8 +4,6 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.Random;
-
 import org.locationanalyzer.clustering.StayDuration;
 import org.locationanalyzer.clustering.StayPointCluster;
 import org.locationanalyzer.patterns.entities.StayLocation;
@@ -42,10 +40,10 @@ public class PatternAnalyzer
 				{
 					if(calendar.get(Calendar.DAY_OF_WEEK)==Calendar.SUNDAY||calendar.get(Calendar.DAY_OF_WEEK)==Calendar.SATURDAY)
 					{
-						weekends++;
+						weekends=weekends+Math.abs(duration.getDepartureTime().getTime()-duration.getArrivalTime().getTime());
 					}
 					else
-						weekdays++;
+						weekdays=weekdays+Math.abs(duration.getDepartureTime().getTime()-duration.getArrivalTime().getTime());
 					lastDay=startTime.getDay();
 				}
 				
@@ -222,21 +220,7 @@ public class PatternAnalyzer
 			{
 				totalMillisecond=totalmillisecondG;
 			}
-			
-			if(weekdays==0&&weekends==0)
-			{
-				weekends=(long) (2.83*weekdays/5);
-			}
-			else if(weekends==0)
-			{
-				weekends=2*weekdays/5;
-			}
-			else if(weekdays==0)
-			{
-				weekdays=(long) (weekends*((float)2.23)/(float)2);
-			}
-			Random random=new Random();
-			StayLocation stayLocation=new StayLocation(stayPointCluster.getId(),stayPointCluster.getClusterCentre(),morningMillisecond,eveningMillisecond,nightMillisecond,totalMillisecond,(long) Math.abs((7*random.nextFloat()+16.8)*weekends),(long) Math.abs((7*random.nextFloat()+16.8)*weekdays));
+			StayLocation stayLocation=new StayLocation(stayPointCluster.getId(),stayPointCluster.getClusterCentre(),morningMillisecond,eveningMillisecond,nightMillisecond,totalMillisecond,weekends,weekdays);
 			stayLocations.add(stayLocation);
 		}
 		return stayLocations;
